@@ -1,15 +1,14 @@
 #Хуинитум
-inspired by [Straykov's Initium](https://github.com/straykov/initium)
 
 Web kit for easy start
 
-Used build system — [Gulp](http://gulpjs.com/);
+- Used build system — [Gulp](http://gulpjs.com/);
 
-Templating with [gulp-html-tag-include](https://www.npmjs.com/package/gulp-html-tag-include);
+- Templating with [gulp-html-tag-include](https://www.npmjs.com/package/gulp-html-tag-include);
 
-Could be used CSS4 features, because of [PostCSS](https://github.com/postcss/postcss) and [PostCSS-cssnext](https://github.com/MoOx/postcss-cssnext);
+- Could be used CSS4 features, because of [PostCSS](https://github.com/postcss/postcss) and [PostCSS-cssnext](https://github.com/MoOx/postcss-cssnext);
 
-Directory & file structure
+##Directory & file structure
 ```
 project
 │   README.md
@@ -53,3 +52,5 @@ project
            main.html
            srcs.html
 ```
+
+Inspired by [Straykov's Initium](https://github.com/straykov/initium)

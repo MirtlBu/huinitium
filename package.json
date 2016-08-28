@@ -19,6 +19,6 @@
     "gulp-rename": "^1.2.2",
     "gulp-uglify": "^1.5.3",
     "postcss-cssnext": "^2.5.2",
-    "postcss-url": "^5.1.2"
+    "postcss-import": "^8.1.2"
   }
 }

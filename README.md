@@ -46,4 +46,10 @@ project
 │          kitty.png
 │
 └───templates
+    │   index.html
+    │
+    └───blocks
+           head.html
+           main.html
+           srcs.html
 ```

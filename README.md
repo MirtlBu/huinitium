@@ -8,7 +8,18 @@ Web kit for easy start
 
 - Could be used CSS4 features, because of [PostCSS](https://github.com/postcss/postcss) and [PostCSS-cssnext](https://github.com/MoOx/postcss-cssnext);
 
+##How to start
+
+First:
+```bash
+npm install
+```
+Then:
+```bash
+gulp build
+```
 ##Directory & file structure
+
 ```
 project
 │   README.md

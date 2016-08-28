@@ -1,0 +1,78 @@
+{
+    "requireCurlyBraces": [
+        "if",
+        "else",
+        "for",
+        "while",
+        "do",
+        "try",
+        "catch"
+    ],
+    "requireSpaceAfterKeywords": [
+        "else",
+        "do",
+        "return",
+        "try",
+        "catch",
+        "typeof"
+    ],
+    "requireKeywordsOnNewLine": [
+        "else"
+    ],
+    "requireSpaceBeforeBlockStatements": true,
+    "requireParenthesesAroundIIFE": true,
+    "requireSpacesInConditionalExpression": true,
+    "requireBlocksOnNewline": true,
+    "requireCommaBeforeLineBreak": true,
+    "requireSpacesInForStatement": true,
+    "requireSpacesInAnonymousFunctionExpression": {
+        "beforeOpeningCurlyBrace": true
+    },
+    "requireSpaceBeforeBinaryOperators": true,
+    "requireSpaceAfterBinaryOperators": true,
+    "requireLineFeedAtFileEnd": true,
+    "requireCapitalizedConstructors": true,
+    "requireDotNotation": true,
+    "requireSpaceBeforeObjectValues": true,
+    "requirePaddingNewLinesBeforeLineComments": true,
+    "disallowSpaceAfterKeywords": [
+        "if",
+        "for",
+        "while",
+        "case",
+        "switch",
+        "function"
+    ],
+    "disallowKeywords": [
+        "with"
+    ],
+    "disallowSpaceAfterPrefixUnaryOperators": true,
+    "disallowSpaceBeforePostfixUnaryOperators": true,
+    "disallowSpaceBeforeBinaryOperators": [
+        ","
+    ],
+    "disallowSpacesInNamedFunctionExpression": {
+        "beforeOpeningRoundBrace": true
+    },
+    "disallowSpacesInFunctionDeclaration": {
+        "beforeOpeningRoundBrace": true
+    },
+    "disallowDanglingUnderscores": true,
+    "disallowEmptyBlocks": true,
+    "disallowSpacesInsideArrayBrackets": true,
+    "disallowSpacesInsideParentheses": true,
+    "disallowMultipleVarDecl": true,
+    "disallowMultipleLineBreaks": true,
+    "disallowMultipleSpaces": true,
+    "disallowMultipleVarDecl": true,
+    "disallowSpaceAfterObjectKeys": true,
+    "disallowMixedSpacesAndTabs": true,
+    "disallowTrailingWhitespace": true,
+    "disallowTrailingComma": true,
+    "disallowNewlineBeforeBlockStatements": true,
+    "disallowMultipleLineStrings": true,
+    "validateIndentation": 4,
+    "validateCommentPosition": {
+        "position": "above"
+    }
+}

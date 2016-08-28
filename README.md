@@ -38,29 +38,29 @@ project
 │          kitty.png
 │
 └───static
-│   │
-│   └───css
-│   │      style.css
-│   │
-│   └───js
-│   │      script.js
-│   │
-│   └───vendors
-│   │   │   plugin1.js
-│   │   │
-│   │   └───plugin
-│   │          plugin2.css
-│   │          plugin2.js
-│   └───img
-│          kitty.png
-│
-└───templates
-    │   index.html
     │
-    └───blocks
-           head.html
-           main.html
-           srcs.html
+    └───css
+    │      style.css
+    │
+    └───js
+    │      script.js
+    │
+    └───vendors
+    │   │   plugin1.js
+    │   │
+    │   └───plugin
+    │          plugin2.css
+    │          plugin2.js
+    └───img
+    │      kitty.png
+    │
+    └───templates
+        │   index.html
+        │
+        └───blocks
+               head.html
+               main.html
+               scripts.html
 ```
 
 Inspired by [Straykov's Initium](https://github.com/straykov/initium)

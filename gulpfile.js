@@ -22,7 +22,7 @@ var paths = {
         templates: 'static/templates/',
         index: ''
     },
-    vendors: 'static/vendors/**/',
+    vendors: 'static/vendors/',
     build: 'build/'
 }
 
@@ -59,14 +59,14 @@ gulp.task('js', function () {
 
 //Сборка vendors js
 gulp.task('vendorsjs', function () {
-    return gulp.src(paths.vendors + '*.js')
+    return gulp.src(paths.vendors + '**/*.js')
         .pipe(concat('vendors.js'))
         .pipe(gulp.dest(paths.build));
 });
 
 //Сборка vendors css
 gulp.task('vendorscss', function () {
-    return gulp.src(paths.vendors + '*.css')
+    return gulp.src(paths.vendors + '**/*.css')
         .pipe(concat('vendors.css'))
         .pipe(gulp.dest(paths.build));
 });

@@ -26,7 +26,7 @@ var paths = {
     build: 'build/'
 }
 
-var pluginspostcss = [cssnext(), cssimport({path: (paths.css + 'style.css'), root: paths.css})];
+var pluginspostcss = [cssimport({path: (paths.css + 'style.css'), root: paths.css}), cssnext()];
 
 //Отслеживание изменений
 gulp.task('watch', function() {

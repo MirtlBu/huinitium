@@ -6,7 +6,6 @@
     "url": "https://github.com/MirtlBu/start_kit.git"
   },
   "devDependencies": {
-    "browser-sync": "^2.12.3",
     "gulp": "^3.9.1",
     "gulp-concat": "^2.6.0",
     "gulp-csscomb": "^3.0.7",

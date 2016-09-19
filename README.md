@@ -35,15 +35,20 @@ project
 │   │   vendors.css
 │   │
 │   └───img
-│          kitty.png
+    │       kitty.png
+│   │
+│   └───fonts
+│           myfont.otf
 │
 └───static
     │
     └───css
-    │      style.css
+    │       header.postcss
+    │       content.postcss
+    │       footer.postcss
     │
     └───js
-    │      script.js
+    │       script.js
     │
     └───vendors
     │   │   plugin1.js
@@ -52,15 +57,18 @@ project
     │          plugin2.css
     │          plugin2.js
     └───img
-    │      kitty.png
+    │       kitty.png
+    │
+    └───fonts
+    │       myfont.otf
     │
     └───templates
         │   index.html
         │
         └───blocks
-               head.html
-               main.html
-               scripts.html
+                head.html
+                main.html
+                scripts.html
 ```
 
 Inspired by [Straykov's Initium](https://github.com/straykov/initium)

@@ -12,12 +12,14 @@ var gulp = require('gulp'),
     jscs = require('gulp-jscs'),
     uglify = require('gulp-uglify'),
     include = require('gulp-html-tag-include'),
-    cssimport = require('postcss-import');
+    cssimport = require('postcss-import'),
+    del = require('del');
 
 var paths = {
     css: 'static/css/',
     js: 'static/js/',
     img: 'static/img/',
+    font: 'static/fonts/',
     html: {
         templates: 'static/templates/',
         index: ''
@@ -30,7 +32,7 @@ var pluginspostcss = [cssimport({path: (paths.css + 'style.css'), root: paths.cs
 
 //Отслеживание изменений
 gulp.task('watch', function() {
-    gulp.watch('static/**/*.{js,css,html}', ['build']);
+    gulp.watch('static/**/*.{js,postcss,html}', ['build']);
 
 });
 
@@ -39,6 +41,24 @@ gulp.task('copy', function () {
   return gulp
     .src(paths.img + '*')
     .pipe(gulp.dest(paths.build + 'img/'));
+});
+
+gulp.task('copyFile', function () {
+  return gulp
+    .src(paths.font + '*')
+    .pipe(gulp.dest(paths.build + 'fonts/'));
+});
+
+gulp.task('rename', function() {
+    return gulp.src(paths.css + '*.postcss')
+    .pipe(rename({
+                extname: '.css'
+            }))
+    .pipe(gulp.dest(paths.css));
+});
+
+gulp.task('delete', function() {
+    return del(paths.css + '*.css');
 });
 
 //Cборка css
@@ -82,7 +102,7 @@ gulp.task('html', function() {
 //Сборка проекта
 gulp.task('build', ['copy', 'html', 'css', 'js', 'vendorscss', 'vendorsjs'], function() {
     return gulp.src('')
-        .pipe(notify({ message: 'Finished with build'}));
+        .pipe(notify({ message: 'Finished with build'}), del(paths.css + '*.css'));
 });
 
 //Минификация

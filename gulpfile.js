@@ -62,7 +62,7 @@ gulp.task('delete', function() {
 });
 
 //Cборка css
-gulp.task('css', function () {
+gulp.task('css', ['rename'], function () {
     return gulp.src(paths.css + 'style.css')
         .pipe(postcss(pluginspostcss))
         .pipe(csscomb())

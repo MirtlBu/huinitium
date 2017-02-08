@@ -13,7 +13,8 @@ var gulp = require('gulp'),
     uglify = require('gulp-uglify'),
     include = require('gulp-html-tag-include'),
     cssimport = require('postcss-import'),
-    del = require('del');
+    del = require('del'),
+    imagemin = require('gulp-imagemin');
 
 var paths = {
     css: 'static/css/',
@@ -32,23 +33,24 @@ var pluginspostcss = [cssimport({path: (paths.css + 'style.css'), root: paths.cs
 
 //Отслеживание изменений
 gulp.task('watch', function() {
-    gulp.watch('static/**/*.{js,postcss,html}', ['build']);
+    gulp.watch('static/**/*.{js,postcss,html,jpg,jpeg,png,gif,svg}', ['build']);
 
+});
+
+gulp.task('imagesOptimization', function() {
+    return gulp.src(paths.img + '*')
+        .pipe(imagemin())
+        .pipe(gulp.dest(paths.build + 'img/'))
 });
 
 //Копирование файлов
-gulp.task('copy', function () {
-  return gulp
-    .src(paths.img + '*')
-    .pipe(gulp.dest(paths.build + 'img/'));
-});
-
 gulp.task('copyFile', function () {
-  return gulp
-    .src(paths.font + '*')
-    .pipe(gulp.dest(paths.build + 'fonts/'));
+    return gulp
+        .src(paths.font + '*')
+        .pipe(gulp.dest(paths.build + 'fonts/'));
 });
 
+//Postcss to css
 gulp.task('rename', function() {
     return gulp.src(paths.css + '*.postcss')
     .pipe(rename({
@@ -100,7 +102,7 @@ gulp.task('html', function() {
 });
 
 //Сборка проекта
-gulp.task('build', ['copy', 'html', 'css', 'js', 'vendorscss', 'vendorsjs'], function() {
+gulp.task('build', ['imagesOptimization', 'html', 'css', 'js', 'vendorscss', 'vendorsjs'], function() {
     return gulp.src('')
         .pipe(notify({ message: 'Finished with build'}), del(paths.css + '*.css'));
 });

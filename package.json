@@ -19,6 +19,8 @@
     "gulp-uglify": "^1.5.3",
     "postcss-cssnext": "^2.5.2",
     "postcss-import": "^8.1.2",
-    "del": "2.2.2"
+    "del": "2.2.2",
+    "gulp-imageoptim": "1.0.8",
+    "gulp-imagemin": "3.1.1"
   }
 }

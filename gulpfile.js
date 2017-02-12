@@ -14,26 +14,33 @@ var gulp = require('gulp'),
     include = require('gulp-html-tag-include'),
     cssimport = require('postcss-import'),
     del = require('del'),
-    imagemin = require('gulp-imagemin');
+    imagemin = require('gulp-imagemin'),
+    resemble_image = require('postcss-resemble-image').default;
+
+process.chdir('static');
 
 var paths = {
-    css: 'static/css/',
-    js: 'static/js/',
-    img: 'static/img/',
-    font: 'static/fonts/',
+    css: 'css/',
+    js: 'js/',
+    img: 'img/',
+    font: 'fonts/',
     html: {
-        templates: 'static/templates/',
+        templates: 'templates/',
         index: ''
     },
-    vendors: 'static/vendors/',
-    build: 'build/'
+    vendors: 'vendors/',
+    build: '../build/'
 }
 
-var pluginspostcss = [cssimport({path: (paths.css + 'style.css'), root: paths.css}), cssnext()];
+var pluginspostcss = [
+    cssimport({path: (paths.css + 'style.css'), root: paths.css}),
+    resemble_image({selectors: ['.resemble_image'], fidelity: '25%'}),
+    cssnext()
+];
 
 //Отслеживание изменений
 gulp.task('watch', function() {
-    gulp.watch('static/**/*.{js,postcss,html,jpg,jpeg,png,gif,svg}', ['build']);
+    gulp.watch('**/*.{js,postcss,html,jpg,jpeg,png,gif,svg}', ['build']);
 
 });
 

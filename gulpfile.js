@@ -12,18 +12,16 @@ var gulp = require('gulp'),
     jscs = require('gulp-jscs'),
     uglify = require('gulp-uglify'),
     include = require('gulp-html-tag-include'),
-    cssimport = require('postcss-import'),
-    del = require('del'),
     imagemin = require('gulp-imagemin'),
     resemble_image = require('postcss-resemble-image').default;
 
+//изменяет рабочую папку на "static"
 process.chdir('static');
 
 var paths = {
-    css: 'css/',
+    postcss: 'postcss/',
     js: 'js/',
     img: 'img/',
-    font: 'fonts/',
     html: {
         templates: 'templates/',
         index: ''
@@ -33,7 +31,6 @@ var paths = {
 }
 
 var pluginspostcss = [
-    cssimport({path: (paths.css + 'style.css'), root: paths.css}),
     resemble_image({selectors: ['.resemble_image'], fidelity: '25%'}),
     cssnext()
 ];
@@ -50,37 +47,21 @@ gulp.task('imagesOptimization', function() {
         .pipe(gulp.dest(paths.build + 'img/'))
 });
 
-//Копирование файлов
-gulp.task('copyFile', function () {
-    return gulp
-        .src(paths.font + '*')
-        .pipe(gulp.dest(paths.build + 'fonts/'));
-});
-
-//Postcss to css
-gulp.task('rename', function() {
-    return gulp.src(paths.css + '*.postcss')
-    .pipe(rename({
+//Cборка css
+gulp.task('css', function () {
+    return gulp.src([paths.postcss + 'reset.postcss', paths.postcss + '*.postcss'])
+        .pipe(concat('style.postcss'))
+        .pipe(postcss(pluginspostcss))
+        .pipe(rename({
                 extname: '.css'
             }))
-    .pipe(gulp.dest(paths.css));
-});
-
-gulp.task('delete', function() {
-    return del(paths.css + '*.css');
-});
-
-//Cборка css
-gulp.task('css', ['rename'], function () {
-    return gulp.src(paths.css + 'style.css')
-        .pipe(postcss(pluginspostcss))
         .pipe(csscomb())
         .pipe(gulp.dest(paths.build));
 });
 
 //Cборка js
 gulp.task('js', function () {
-    return gulp.src([paths.js + 'script.js'])
+    return gulp.src(paths.js + '*.js')
         .pipe(concat('script.js'))
         .pipe(jscs({fix: true}))
         .pipe(gulp.dest(paths.build));
@@ -111,7 +92,7 @@ gulp.task('html', function() {
 //Сборка проекта
 gulp.task('build', ['imagesOptimization', 'html', 'css', 'js', 'vendorscss', 'vendorsjs'], function() {
     return gulp.src('')
-        .pipe(notify({ message: 'Finished with build'}), del(paths.css + '*.css'));
+        .pipe(notify({message: 'Finished with build'}));
 });
 
 //Минификация

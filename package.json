@@ -1,28 +1,25 @@
 {
-  "name": "StartKit",
-  "version": "1.0.0",
+  "name": "Huinitium",
+  "version": "0.1.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/MirtlBu/start_kit.git"
+    "url": "https://github.com/MirtlBu/huinitium"
   },
   "devDependencies": {
-    "gulp": "^3.9.1",
-    "gulp-concat": "^2.6.0",
-    "gulp-csscomb": "^3.0.7",
-    "gulp-cssmin": "^0.1.7 ",
-    "gulp-html-tag-include": "^1.0.1",
-    "gulp-jscs": "^4.0.0",
-    "gulp-notify": "^2.2.0",
-    "gulp-plumber": "^1.1.0",
-    "gulp-postcss": "^6.1.0",
-    "gulp-rename": "^1.2.2",
-    "gulp-uglify": "^1.5.3",
-    "postcss-cssnext": "^2.5.2",
-    "postcss-import": "^8.1.2",
+    "gulp": "3.*",
+    "gulp-concat": "2.*",
+    "gulp-csscomb": "3.*",
+    "gulp-cssmin": "0.*",
+    "gulp-html-tag-include": "1.*",
+    "gulp-jscs": "4.*",
+    "gulp-notify": "2.*",
+    "gulp-plumber": "1.*",
+    "gulp-postcss": "6.*",
+    "gulp-rename": "1.*",
+    "gulp-uglify": "1.*",
+    "postcss-cssnext": "2.*",
     "postcss-resemble-image": "2.*",
-    "del": "2.2.2",
-    "gulp-imageoptim": "1.0.8",
-    "gulp-imagemin": "3.1.1",
+    "gulp-imagemin": "3.*",
     "gulp-connect": "5.*"
   }
 }

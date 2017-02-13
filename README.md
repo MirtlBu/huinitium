@@ -7,12 +7,14 @@ Web kit for easy start
 
 - Templating with [gulp-html-tag-include](https://www.npmjs.com/package/gulp-html-tag-include);
 
+- Run a webserver on 8000 with [gulp-connect](https://www.npmjs.com/package/gulp-connect);
+
 - Could be used CSS4 features, because of [PostCSS](https://github.com/postcss/postcss) and [PostCSS-cssnext](https://github.com/MoOx/postcss-cssnext);
 
 ##How to start
 ```bash
     $ npm install
-    $ gulp build
+    $ gulp start
 ```
 ##Directory & file structure
 ```
@@ -31,14 +33,15 @@ project
 │   │   vendors.css
 │   │
 │   └───img
-    │       kitty.png
+│   │       kitty.png
 │   │
 │   └───fonts
 │           myfont.otf
 │
 └───static
     │
-    └───css
+    └───postcss
+    │       style.postcss
     │       header.postcss
     │       content.postcss
     │       footer.postcss

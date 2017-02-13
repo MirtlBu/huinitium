@@ -1,19 +1,19 @@
 'use strict';
 
 var gulp = require('gulp'),
+    concat = require('gulp-concat'),
+    csscomb = require('gulp-csscomb'),
+    cssmin = require('gulp-cssmin'),
+    include = require('gulp-html-tag-include'),
+    jscs = require('gulp-jscs'),
     notify = require('gulp-notify'),
     plumber = require('gulp-plumber'),
-    rename = require('gulp-rename'),
-    concat = require('gulp-concat'),
-    cssnext = require('postcss-cssnext'),
-    cssmin = require('gulp-cssmin'),
-    csscomb = require('gulp-csscomb'),
     postcss = require('gulp-postcss'),
-    jscs = require('gulp-jscs'),
+    rename = require('gulp-rename'),
     uglify = require('gulp-uglify'),
-    include = require('gulp-html-tag-include'),
-    imagemin = require('gulp-imagemin'),
+    cssnext = require('postcss-cssnext'),
     resemble_image = require('postcss-resemble-image').default,
+    imagemin = require('gulp-imagemin'),
     connect = require('gulp-connect');
 
 //изменяет рабочую папку на "static"

@@ -1,25 +1,23 @@
 {
   "name": "Huinitium",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/MirtlBu/huinitium"
   },
   "devDependencies": {
-    "gulp": "3.*",
-    "gulp-concat": "2.*",
-    "gulp-csscomb": "3.*",
-    "gulp-cssmin": "0.*",
-    "gulp-html-tag-include": "1.*",
-    "gulp-jscs": "4.*",
-    "gulp-notify": "2.*",
-    "gulp-plumber": "1.*",
-    "gulp-postcss": "6.*",
-    "gulp-rename": "1.*",
-    "gulp-uglify": "1.*",
-    "postcss-cssnext": "2.*",
-    "postcss-resemble-image": "2.*",
-    "gulp-imagemin": "3.*",
-    "gulp-connect": "5.*"
+    "gulp": "4.0.*",
+    "gulp-concat": "2.6.*",
+    "gulp-connect": "5.7.*",
+    "gulp-cssmin": "0.2.*",
+    "reset-css": "5.0.*",
+    "gulp-html-tag-include": "1.0.*",
+    "imagemin": "7.0.*",
+    "imagemin-jpegtran": "6.0.*",
+    "imagemin-pngquant": "8.0.*",
+    "gulp-plumber": "1.2.*",
+    "gulp-rename": "2.0.*",
+    "gulp-uglify": "3.0.*",
+    "del": "5.1.*"
   }
 }

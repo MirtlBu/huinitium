@@ -3,25 +3,22 @@
 Web kit for easy start
 
 ##Features
-- Used build system — [Gulp](http://gulpjs.com/);
+- Used build system — [Gulp 4](http://gulpjs.com/);
 
 - Templating with [gulp-html-tag-include](https://www.npmjs.com/package/gulp-html-tag-include);
 
 - Run a webserver on 8000 with [gulp-connect](https://www.npmjs.com/package/gulp-connect);
 
-- Could be used CSS4 features, because of [PostCSS](https://github.com/postcss/postcss) and [PostCSS-cssnext](https://github.com/MoOx/postcss-cssnext);
-
 ##How to start
 ```bash
     $ npm install
-    $ gulp start
+    $ gulp
 ```
 ##Directory & file structure
 ```
 project
 │   README.md
-│   .csscomb.json
-│   .jscsrc
+│   .gitiignore
 │   gulpfile.js
 │   package.json
 │
@@ -29,37 +26,20 @@ project
 │   │   index.html
 │   │   script.js
 │   │   style.css
-│   │   vendors.js
-│   │   vendors.css
 │   │
 │   └───img
-│   │       kitty.png
-│   │
-│   └───fonts
-│           myfont.otf
+│          kitty.png
 │
 └───static
     │
-    └───postcss
-    │       style.postcss
-    │       header.postcss
-    │       content.postcss
-    │       footer.postcss
+    └───css
+    │       style.css
     │
     └───js
     │       script.js
     │
-    └───vendors
-    │   │   plugin1.js
-    │   │
-    │   └───plugin
-    │          plugin2.css
-    │          plugin2.js
     └───img
     │       kitty.png
-    │
-    └───fonts
-    │       myfont.otf
     │
     └───templates
         │   index.html

@@ -3,7 +3,7 @@
 const series = require('gulp'),
     parallel = require('gulp'),
     gulp = require('gulp'),
-    del = require("del");
+    del = require("del"),
     concat = require('gulp-concat'),
     cssmin = require('gulp-cssmin'),
     uglify = require('gulp-uglify'),

@@ -1,26 +1,25 @@
 'use strict';
 
-var gulp = require('gulp'),
+const series = require('gulp'),
+    parallel = require('gulp'),
+    gulp = require('gulp'),
+    del = require("del");
     concat = require('gulp-concat'),
-    csscomb = require('gulp-csscomb'),
     cssmin = require('gulp-cssmin'),
-    include = require('gulp-html-tag-include'),
-    jscs = require('gulp-jscs'),
-    notify = require('gulp-notify'),
-    plumber = require('gulp-plumber'),
-    postcss = require('gulp-postcss'),
-    rename = require('gulp-rename'),
     uglify = require('gulp-uglify'),
-    cssnext = require('postcss-cssnext'),
-    resemble_image = require('postcss-resemble-image').default,
-    imagemin = require('gulp-imagemin'),
+    imagemin = require('imagemin'),
+    imageminJpegtran = require('imagemin-jpegtran'),
+    imageminPngquant = require('imagemin-pngquant'),
+    include = require('gulp-html-tag-include'),
+    plumber = require('gulp-plumber'),
+    rename = require('gulp-rename'),
     connect = require('gulp-connect');
 
 //изменяет рабочую папку на "static"
 process.chdir('static');
 
-var paths = {
-    postcss: 'postcss/',
+const paths = {
+    css: 'css/',
     js: 'js/',
     img: 'img/',
     html: {
@@ -31,117 +30,82 @@ var paths = {
     build: '../build/'
 }
 
-var pluginspostcss = [
-    resemble_image({selectors: ['.resemble_image'], fidelity: '25%'}),
-    cssnext()
-];
+function server() {
+    connect.server({
+        root: paths.build,
+        livereload: false,
+        name: 'Huinitum server',
+        port: '8000'
+    });
+}
 
-gulp.task('connect', function() {
-  connect.server({
-    root: '../build',
-    livereload: false,
-    name: 'Huinitum server',
-    port: '8000'
-  });
-});
+function clean() {
+  return (async () => {
+        const deletedPaths = await del([paths.build], {force: true});
+        console.log('Deleted files and directories:\n', deletedPaths.join('\n'));
+    })();
+}
 
-gulp.task('start', ['build', 'connect'], function () {
-  gulp.watch(['**/*.{js,postcss,html,jpg,jpeg,png,gif,svg}'], ['build']);
-});
-
-//вариант с livereload в браузере
-// gulp.task('connect', function() {
-//   connect.server({
-//     root: '../build',
-//     livereload: true,
-//     name: 'Huinitum server',
-//     port: '8000'
-//   });
-// });
-
-// gulp.task('reload', function () {
-//   gulp.src('**/*.{js,postcss,html,jpg,jpeg,png,gif,svg}')
-//     .pipe(connect.reload());
-// });
-
-// gulp.task('start', ['build', 'connect'], function () {
-//   gulp.watch(['**/*.{js,postcss,html,jpg,jpeg,png,gif,svg}'], ['build', 'reload']);
-// });
-
-
-gulp.task('imagesOptimization', function() {
-    return gulp.src(paths.img + '*')
-        .pipe(imagemin())
-        .pipe(gulp.dest(paths.build + 'img/'))
-});
-
-//Cборка css
-gulp.task('css', function () {
-    return gulp.src([paths.postcss + 'reset.postcss', paths.postcss + '*.postcss'])
-        .pipe(concat('style.postcss'))
-        .pipe(postcss(pluginspostcss))
-        .pipe(rename({
-                extname: '.css'
-            }))
-        .pipe(csscomb())
+function css() {
+    return gulp.src(['../node_modules/reset-css/reset.css', paths.css + '*.css'])
+        .pipe(plumber())
+        .pipe(concat('style.css'))
         .pipe(gulp.dest(paths.build));
-});
+}
 
-//Cборка js
-gulp.task('js', function () {
+function js() {
     return gulp.src(paths.js + '*.js')
+        .pipe(plumber())
         .pipe(concat('script.js'))
-        .pipe(jscs({fix: true}))
         .pipe(gulp.dest(paths.build));
-});
+}
 
-//Сборка vendors js
-gulp.task('vendorsjs', function () {
-    return gulp.src(paths.vendors + '**/*.js')
-        .pipe(concat('vendors.js'))
-        .pipe(gulp.dest(paths.build));
-});
+function img() {
+    return (async () => {
+        const files = await imagemin([paths.img], {
+            destination: paths.build + '/img',
+            plugins: [
+                imageminJpegtran(),
+                imageminPngquant({
+                    quality: [0.91, 0.91],
+                    dithering: false
+                })
+            ]
+        });
+    })();
+}
 
-//Сборка vendors css
-gulp.task('vendorscss', function () {
-    return gulp.src(paths.vendors + '**/*.css')
-        .pipe(concat('vendors.css'))
-        .pipe(gulp.dest(paths.build));
-});
-
-//Шаблонизация
-gulp.task('html', function() {
+function html() {
     return gulp.src(paths.html.templates + '*.html')
-        .pipe(plumber({errorHandler: errorHandler}))
+        .pipe(plumber())
         .pipe(include())
         .pipe(gulp.dest(paths.build));
-});
+}
 
-//Сборка проекта
-gulp.task('build', ['imagesOptimization', 'html', 'css', 'js', 'vendorscss', 'vendorsjs'], function() {
-    return gulp.src('')
-        .pipe(notify({message: 'Finished with build'}));
-});
-
-//Минификация
-gulp.task('uglify', function () {
-    return gulp.src(paths.build + 'script.js')
-        .pipe(uglify())
-        .pipe(gulp.dest(paths.build));
-});
-
-gulp.task('cssmin', function () {
+function css_minifier() {
     return gulp.src(paths.build + 'style.css')
         .pipe(cssmin())
         .pipe(gulp.dest(paths.build));
-});
-
-gulp.task('minify', ['uglify', 'cssmin'], function() {
-    return gulp.src('')
-        .pipe(notify({ message: 'Finished with minification'}));
-});
-
-function errorHandler (error) {
-  console.log(error.toString());
-  this.emit('end');
 }
+
+function js_uglifier() {
+    return gulp.src(paths.build + 'script.js')
+        .pipe(uglify())
+        .pipe(gulp.dest(paths.build));
+}
+
+function watcher() {
+    gulp.watch('**/*.css', css);
+    gulp.watch('**/*.js', js);
+    gulp.watch('**/*.html', html);
+    gulp.watch('**/*.jpg', img);
+    gulp.watch('**/*.png', img);
+}
+
+const build = gulp.series(clean, gulp.parallel(css, js, html, img));
+const start = gulp.series(build, gulp.parallel(server, watcher));
+const prod = gulp.series(clean, gulp.parallel(css, js, html, img), gulp.parallel(css_minifier, js_uglifier));
+
+exports.prod = prod;
+exports.start = start;
+exports.default = start;

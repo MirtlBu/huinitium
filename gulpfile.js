@@ -127,7 +127,7 @@ function watcher() {
     gulp.watch('**/*.css', css);
     gulp.watch('**/*.js', js);
     gulp.watch('**/*.html', html);
-    gulp.watch(['**/*.jpg','**/*.png'], img);
+    gulp.watch(['**/*.jpg','**/*.png','**/*.svg', '**/*.gif'], img);
     gulp.watch(['**/*.ttf', '**/*.otf', '**/*.woff'], fonts);
 }
 

@@ -1,8 +1,8 @@
-#Хуинитум
+# Хуинитум
 
 Web kit for easy start
 
-##Features
+## Features
 - Used build system — [Gulp 4](http://gulpjs.com/);
 
 - Compiling scss and less with gulp
@@ -11,12 +11,12 @@ Web kit for easy start
 
 - Run a webserver on 8000 with [gulp-connect](https://www.npmjs.com/package/gulp-connect);
 
-##How to start
+## How to start
 ```bash
     $ npm install
     $ gulp
 ```
-##Directory & file structure
+## Directory & file structure
 ```
 project
 │   README.md

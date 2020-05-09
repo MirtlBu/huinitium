@@ -27,6 +27,8 @@ project
 │   │   script.js
 │   │   style.css
 │   │
+│   └───fonts
+│   │
 │   └───img
 │          kitty.png
 │
@@ -40,6 +42,9 @@ project
     │
     └───img
     │       kitty.png
+    │
+    └───fonts
+    │
     │
     └───templates
         │   index.html

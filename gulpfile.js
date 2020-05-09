@@ -13,13 +13,16 @@ const series = require('gulp'),
     include = require('gulp-html-tag-include'),
     plumber = require('gulp-plumber'),
     rename = require('gulp-rename'),
-    connect = require('gulp-connect');
+    connect = require('gulp-connect'), path = require('path'),
+    less = require('gulp-less'),
+    sass = require('gulp-sass');
 
 //изменяет рабочую папку на "static"
 process.chdir('static');
 
 const paths = {
     css: 'css/',
+    preprocessors: 'preprocessors/',
     js: 'js/',
     img: 'img/',
     html: {
@@ -47,8 +50,26 @@ function clean() {
     })();
 }
 
+function sassy() {
+    return gulp.src(paths.preprocessors + '*.scss')
+        .pipe(concat('style.scss'))
+        .pipe(sass().on('error', sass.logError))
+        .pipe(concat('preprocessors.css'))
+        .pipe(gulp.dest(paths.css));
+}
+
+function lessy() {
+    return gulp.src(paths.preprocessors + '*.less')
+        .pipe(concat('style.less'))
+        .pipe(less({
+          paths: [ path.join(__dirname, 'less', 'includes') ]
+        }))
+        .pipe(concat('preprocessors.css'))
+        .pipe(gulp.dest(paths.css));
+}
+
 function css() {
-    return gulp.src(['../node_modules/reset-css/reset.css', paths.css + '*.css'])
+    return gulp.src(['../node_modules/reset-css/reset.css', paths.css + '**/*.css'])
         .pipe(plumber())
         .pipe(concat('style.css'))
         .pipe(gulp.dest(paths.build));
@@ -101,6 +122,8 @@ function js_uglifier() {
 }
 
 function watcher() {
+    gulp.watch('**/*.scss', sassy);
+    gulp.watch('**/*.less', lessy);
     gulp.watch('**/*.css', css);
     gulp.watch('**/*.js', js);
     gulp.watch('**/*.html', html);

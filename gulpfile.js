@@ -26,6 +26,7 @@ const paths = {
         templates: 'templates/',
         index: ''
     },
+    fonts: 'fonts/',
     vendors: 'vendors/',
     build: '../build/'
 }
@@ -58,6 +59,11 @@ function js() {
         .pipe(plumber())
         .pipe(concat('script.js'))
         .pipe(gulp.dest(paths.build));
+}
+
+function fonts() {
+    return gulp.src([paths.fonts + '*.otf', paths.fonts + '*.ttf', paths.fonts + '*.woff'])
+        .pipe(gulp.dest(paths.build + 'fonts/'));
 }
 
 function img() {
@@ -98,13 +104,13 @@ function watcher() {
     gulp.watch('**/*.css', css);
     gulp.watch('**/*.js', js);
     gulp.watch('**/*.html', html);
-    gulp.watch('**/*.jpg', img);
-    gulp.watch('**/*.png', img);
+    gulp.watch(['**/*.jpg','**/*.png'], img);
+    gulp.watch(['**/*.ttf', '**/*.otf', '**/*.woff'], fonts);
 }
 
-const build = gulp.series(clean, gulp.parallel(css, js, html, img));
+const build = gulp.series(clean, gulp.parallel(css, js, html, img, fonts));
 const start = gulp.series(build, gulp.parallel(server, watcher));
-const prod = gulp.series(clean, gulp.parallel(css, js, html, img), gulp.parallel(css_minifier, js_uglifier));
+const prod = gulp.series(clean, gulp.parallel(css, js, html, img, fonts), gulp.parallel(css_minifier, js_uglifier));
 
 exports.prod = prod;
 exports.start = start;

@@ -5,7 +5,7 @@ Web kit for easy start
 ##Features
 - Used build system — [Gulp 4](http://gulpjs.com/);
 
--Compiling scss and less with gulp
+- Compiling scss and less with gulp
 
 - Templating with [gulp-html-tag-include](https://www.npmjs.com/package/gulp-html-tag-include);
 
